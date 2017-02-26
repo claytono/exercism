@@ -1,6 +1,6 @@
 package scrabble
 
-import "strings"
+import "unicode"
 
 const testVersion = 4
 
@@ -34,8 +34,8 @@ var scoreSheet = map[rune]int{
 }
 
 func Score(word string) (score int) {
-	for _, rune := range strings.ToUpper(word) {
-		score += scoreSheet[rune]
+	for _, rune := range word {
+		score += scoreSheet[unicode.ToUpper(rune)]
 	}
 
 	return
