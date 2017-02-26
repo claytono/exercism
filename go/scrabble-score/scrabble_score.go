@@ -4,38 +4,43 @@ import "unicode"
 
 const testVersion = 4
 
-var scoreSheet = map[rune]int{
-	'A': 1,
-	'B': 3,
-	'C': 3,
-	'D': 2,
-	'E': 1,
-	'F': 4,
-	'G': 2,
-	'H': 4,
-	'I': 1,
-	'J': 8,
-	'K': 5,
-	'L': 1,
-	'M': 3,
-	'N': 1,
-	'O': 1,
-	'P': 3,
-	'Q': 10,
-	'R': 1,
-	'S': 1,
-	'T': 1,
-	'U': 1,
-	'V': 4,
-	'W': 4,
-	'X': 8,
-	'Y': 4,
-	'Z': 10,
+var scoreSheet = []int{
+	1,  // A
+	3,  // B
+	3,  // C
+	2,  // D
+	1,  // E
+	4,  // F
+	2,  // G
+	4,  // H
+	1,  // I
+	8,  // J
+	5,  // K
+	1,  // L
+	3,  // M
+	1,  // N
+	1,  // O
+	3,  // P
+	10, // Q
+	1,  // R
+	1,  // S
+	1,  // T
+	1,  // U
+	4,  // V
+	4,  // W
+	8,  // X
+	4,  // Y
+	10, // Z
 }
 
 func Score(word string) (score int) {
 	for _, rune := range word {
-		score += scoreSheet[unicode.ToUpper(rune)]
+		upperRune := unicode.ToUpper(rune)
+		if upperRune < 'A' || upperRune > 'Z' {
+			continue
+		}
+		offset := upperRune - 'A'
+		score += scoreSheet[offset]
 	}
 
 	return
