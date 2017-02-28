@@ -1,7 +1,5 @@
 package pythagorean
 
-import "math"
-
 type Triplet [3]int
 
 func Range(min, max int) []Triplet {
@@ -9,15 +7,15 @@ func Range(min, max int) []Triplet {
 
 	for a := min; a <= max; a++ {
 		for b := a; b <= max; b++ {
-			// Calculate what c would be
-			cf := math.Sqrt(float64(a*a + b*b))
-
-			// Convert back to an integer, and then compare to the float
-			// version.  If they're not equal then the length isn't an integer
-			// and isn't valid a valid solution
-			c := int(cf)
-			if c <= max && float64(c) == cf {
-				results = append(results, Triplet{a, b, c})
+			// My original solution used float math to calculate exactly what
+			// c would be, then checked if it was under max.  That solution is
+			// probably faster for large enough values of max, but the test
+			// case given only goes up to 20.  In that case, the brute force
+			// approach is faster.
+			for c := b; c <= max; c++ {
+				if a*a+b*b == c*c {
+					results = append(results, Triplet{a, b, c})
+				}
 			}
 		}
 	}
